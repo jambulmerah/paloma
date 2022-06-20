@@ -7,7 +7,10 @@ if ! which jq > /dev/null; then
   exit 1
 fi
 
-CHAIN_ID="paloma"
+if [[ -z "${CHAIN_ID:-}" ]]; then
+  echo 'CHAIN_ID required'
+fi
+
 VALIDATOR_STAKE_AMOUNT=100000000grain
 
 palomad init my_validator --chain-id "$CHAIN_ID"
